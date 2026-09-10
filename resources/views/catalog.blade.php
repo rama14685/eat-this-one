@@ -63,7 +63,7 @@
     </style>
 </head>
 <body class="min-h-screen bg-[#F4F7FF] text-[#0B1A3A]" x-data="cartApp({{ Js::from($addOnPayloads) }})">
-    <header class="sticky top-0 z-40 border-b border-[#0038FF]/20 bg-white/75 backdrop-blur-xl">
+    <header class="sticky top-0 z-40 border-b border-[#0038FF]/20 bg-white/75 backdrop-blur-xl" x-data="{ mobileMenuOpen: false }">
         <div class="mx-auto flex max-w-7xl items-center gap-5 px-5 py-3 sm:px-8">
             <a href="#home" class="flex shrink-0 items-center gap-2 text-xl font-extrabold tracking-tight text-[#0038FF] sm:text-2xl"><img src="{{ asset('logo.jpg') }}" alt="" class="h-9 w-9 rounded-full object-cover shadow-sm"> <span class="et-display">Eat This One</span></a>
             <nav class="hidden flex-1 items-center justify-center gap-5 text-xs font-extrabold uppercase tracking-wide text-[#405070] lg:flex" aria-label="Navigasi utama">
@@ -79,9 +79,17 @@
                 <span class="hidden sm:inline">Quick Order</span>
                 <span x-show="totalItems > 0" x-text="totalItems" class="absolute -right-2 -top-2 inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-white px-1.5 text-xs font-extrabold text-[#0038FF]"></span>
             </button>
+            <button @click="mobileMenuOpen = !mobileMenuOpen" :aria-expanded="mobileMenuOpen.toString()" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#0038FF]/20 bg-white text-[#0038FF] transition hover:bg-[#F4F7FF] focus:outline-none focus:ring-2 focus:ring-[#0038FF]/30 lg:hidden" aria-label="Buka menu navigasi">
+                <svg x-show="!mobileMenuOpen" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16" /></svg>
+                <svg x-show="mobileMenuOpen" x-cloak class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 6 12 12M18 6 6 18" /></svg>
+            </button>
         </div>
-        <nav class="flex gap-5 overflow-x-auto border-t border-[#0038FF]/10 px-5 py-2 text-[10px] font-extrabold uppercase tracking-wide text-[#405070] lg:hidden" aria-label="Navigasi mobile">
-            <a href="#home" class="shrink-0">Home</a><a href="#about" class="shrink-0">About Us</a><a href="#menu" class="shrink-0">Menu Catalog</a><a href="#order-guide" class="shrink-0">How to Order</a><a href="#contact" class="shrink-0">Contact</a>
+        <nav x-cloak x-show="mobileMenuOpen" x-transition.origin.top class="absolute left-4 right-4 top-full z-50 rounded-2xl border border-[#0038FF]/15 bg-white p-2 shadow-xl lg:hidden" aria-label="Navigasi mobile">
+            <a @click="mobileMenuOpen = false" href="#home" class="block rounded-xl px-4 py-3 text-xs font-extrabold uppercase tracking-wide text-[#405070] transition hover:bg-[#F4F7FF] hover:text-[#0038FF]">Home</a>
+            <a @click="mobileMenuOpen = false" href="#about" class="block rounded-xl px-4 py-3 text-xs font-extrabold uppercase tracking-wide text-[#405070] transition hover:bg-[#F4F7FF] hover:text-[#0038FF]">About Us</a>
+            <a @click="mobileMenuOpen = false" href="#menu" class="block rounded-xl px-4 py-3 text-xs font-extrabold uppercase tracking-wide text-[#405070] transition hover:bg-[#F4F7FF] hover:text-[#0038FF]">Menu Catalog</a>
+            <a @click="mobileMenuOpen = false" href="#order-guide" class="block rounded-xl px-4 py-3 text-xs font-extrabold uppercase tracking-wide text-[#405070] transition hover:bg-[#F4F7FF] hover:text-[#0038FF]">How to Order</a>
+            <a @click="mobileMenuOpen = false" href="#contact" class="block rounded-xl px-4 py-3 text-xs font-extrabold uppercase tracking-wide text-[#405070] transition hover:bg-[#F4F7FF] hover:text-[#0038FF]">Contact</a>
         </nav>
     </header>
 

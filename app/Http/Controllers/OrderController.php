@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AddOn;
 use App\Models\Order;
 use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -111,6 +112,8 @@ class OrderController extends Controller
             ->latest('ordered_at')
             ->get();
 
-        return view('orders.print-summary', compact('orders', 'label', 'start', 'end'));
+        return Pdf::loadView('orders.print-summary', compact('orders', 'label', 'start', 'end'))
+            ->setPaper('a4', 'portrait')
+            ->download("rekap-pembelian-{$period}-".now()->format('Y-m-d').'.pdf');
     }
 }
