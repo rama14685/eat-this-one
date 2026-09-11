@@ -1,2 +1,2 @@
 [phases.setup]
-phpPkgs = ["php", "php-intl", "php-zip", "php-mbstring", "php-xml", "php-curl", "php-pgsql"]
+phpPkgs = ["intl", "zip", "mbstring", "xml", "curl", "pdo_pgsql", "openssl"]
